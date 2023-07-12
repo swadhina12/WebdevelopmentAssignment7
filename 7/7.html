@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-section,
+    .preview-section {
+      width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section label,
+    .form-section input,
+    .form-section textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .preview-section h2,
+    .preview-section p {
+      margin-bottom: 10px;
+    }
+
+    .preview-section img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .submit-button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-section">
+      <label for="story-name">Story Name:</label>
+      <input type="text" id="story-name" placeholder="Enter your story name">
+
+      <label for="image-url">Image URL:</label>
+      <input type="text" id="image-url" placeholder="Enter the image URL">
+
+      <label for="author-name">Author Name:</label>
+      <input type="text" id="author-name" placeholder="Enter the author name">
+
+      <label for="category">Category:</label>
+      <input type="text" id="category" placeholder="Enter the category">
+
+      <label for="story">Enter Your Story:</label>
+      <textarea id="story" placeholder="Enter your story"></textarea>
+
+      <button class="submit-button" id="submit-story">Submit Story</button>
+    </div>
+
+    <div class="preview-section">
+      <h2>Preview</h2>
+      <h3 id="preview-story-name"></h3>
+      <p id="preview-author"></p>
+      <p id="preview-category"></p>
+      <img id="preview-image" src="" alt="Story Image">
+      <p id="preview-story"></p>
+    </div>
+  </div>
+
+  <script>
+    // Get form input elements
+    const storyNameInput = document.getElementById('story-name');
+    const imageUrlInput = document.getElementById('image-url');
+    const authorNameInput = document.getElementById('author-name');
+    const categoryInput = document.getElementById('category');
+    const storyInput = document.getElementById('story');
+
+    // Get preview section elements
+    const previewStoryName = document.getElementById('preview-story-name');
+    const previewAuthor = document.getElementById('preview-author');
+    const previewCategory = document.getElementById('preview-category');
+    const previewImage = document.getElementById('preview-image');
+    const previewStory = document.getElementById('preview-story');
+
+    // Update preview on input change
+    storyNameInput.addEventListener('input', updatePreview);
+    imageUrlInput.addEventListener('input', updatePreview);
+    authorNameInput.addEventListener('input', updatePreview);
+    categoryInput.addEventListener('input', updatePreview);
+    storyInput.addEventListener('input', updatePreview);
+
+    function updatePreview() {
+      // Update preview text with form input values
+      previewStoryName.textContent = storyNameInput.value;
+      previewAuthor.textContent = `By ${authorNameInput.value}`;
+      previewCategory.textContent = `Category: ${categoryInput.value}`;
+      previewImage.src = imageUrlInput.value;
+      previewStory.textContent = storyInput.value;
+    }
+
+    // Submit story button event listener
+    const submitButton = document.getElementById('submit-story');
+    submitButton.addEventListener('click', () => {
+      // Perform actions on submitting the story
+      alert('Story submitted!');
+    });
+  </script>
+</body>
+</html>

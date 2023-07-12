@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Todo App</h1>
+    <div class="input-container">
+      <input type="text" id="taskInput" placeholder="Enter a task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+  
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit Todo</h2>
+      <form id="editForm" onsubmit="updateTask(event)">
+        <input type="text" id="editInput" placeholder="Edit task..." required>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

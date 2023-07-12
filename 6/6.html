@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .product-card {
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .product-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .add-to-cart-button {
+      background-color: #4CAF50;
+    }
+
+    .buy-now-button {
+      background-color: #008CBA;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+  <div class="product-container" id="product-list"></div>
+
+  <script>
+    // Fetch products from the API
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(products => {
+        const productListElement = document.getElementById('product-list');
+
+        // Iterate through the products and display them
+        products.forEach(product => {
+          const productCardElement = document.createElement('div');
+          productCardElement.classList.add('product-card');
+          productCardElement.innerHTML = `
+            <h2 class="product-title">${product.title}</h2>
+            <p class="product-price">$${product.price}</p>
+            <p class="product-description">${product.description}</p>
+            <img class="product-image" src="${product.image}" alt="${product.title}">
+            <div class="button-container">
+              <button class="button add-to-cart-button">Add to Cart</button>
+              <button class="button buy-now-button">Buy Now</button>
+            </div>
+          `;
+
+          // Add click event listener to redirect to single product page
+          productCardElement.addEventListener('click', () => {
+            // Store the selected product in localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'single-product.html'; // Redirect to single product page
+          });
+
+          productListElement.appendChild(productCardElement);
+        });
+      });
+  </script>
+</body>
+</html>
